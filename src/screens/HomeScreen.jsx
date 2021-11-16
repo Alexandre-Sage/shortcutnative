@@ -6,12 +6,10 @@ import {Component} from "react"
 export default class HomeScreen extends Component {
    constructor(props){
       super(props)
-      this.state={
-         importationApi: [],
-      }
+
 
       } componentDidMount(){
-      
+
 
          } render(){
               return (
@@ -20,7 +18,7 @@ export default class HomeScreen extends Component {
                      <Text style={styles.homeTitle}>Rechercher par: </Text>
 
                      <View>
-                        <TouchableOpacity style={styles.buttonTouch}><Text style={styles.touchableText}>Catégories</Text></TouchableOpacity>
+                        <TouchableOpacity style={styles.buttonTouch} onPress={()=>this.props.navigation.navigate("Category")}><Text style={styles.touchableText}>Catégories</Text></TouchableOpacity>
                         <TouchableOpacity style={styles.buttonTouch}><Text style={styles.touchableText}>Logiciels</Text></TouchableOpacity>
                      </View>
 
