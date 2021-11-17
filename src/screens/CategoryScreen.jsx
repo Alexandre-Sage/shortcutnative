@@ -16,7 +16,7 @@ export default class CategorieSearchScreen extends Component{
         .then(data=>this.setState({importCategories: data["hydra:member"]}))
         .catch(error=>console.log("error"));
 
-        fetch("http://shortcuts.api.pierre-jehan.com/shortcuts?categories.id=1")
+        fetch("http://shortcuts.api.pierre-jehan.com/shortcuts?page=1")
         .then(response=>response.json())
         .then(data=>this.setState({importShortcuts: data["hydra:member"]}))
         .catch(error=>console.log("error"));
@@ -24,11 +24,21 @@ export default class CategorieSearchScreen extends Component{
       console.log(this.state.importShortcuts);
       console.log(this.state.importCategories);
       const categorieJsx=this.state.importCategories.map(cat=>(<Picker.Item key={cat.id} value={cat.name} label={cat.name}/>));
-      const shortcutJsx= this.state.importShortcuts.map(shortcut=>(
-                                                      <View key={shortcut.id}>
-                                                        <Text>{shortcut.title}</Text>
-                                                      </View>
-                                                  ))
+      const shortcutJsx = this.state.importShortcuts.map((shortcut) => (  /*Shortcuts= importShortcuts*/
+
+            <View key={shortcut.id}>
+              <Text>{shortcut.title}</Text>
+              <Text>{shortcut.software.name}</Text>
+              <View>
+                {shortcut.categories.map((cat) => (
+                  <Text key={cat.id}>
+                    {cat.name}
+                  </Text>
+                ))}
+              </View>
+            </View>
+
+        ));
       return(
           <View>
             <Text>Rechercher par Catégories: </Text>
