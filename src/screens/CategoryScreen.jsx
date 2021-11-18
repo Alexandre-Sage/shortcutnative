@@ -1,32 +1,31 @@
 import React from 'react';
-import {StyleSheet, Text, View, Button, Image, Picker, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, View, Button, Image, Picker, TouchableOpacity, ScrollView} from 'react-native';
 import {Component} from "react";
 /*selectedValue="name"
 onValueChange={(cat) => this.setState({categorie: cat})}*/
+//Changement fait au niveaux de selectedValue state ajouter URL du on value change a changer
 export default class CategorieSearchScreen extends Component{
   constructor(props){
     super(props)
     this.state={
         importCategories: [],
         importShortcuts: [],
+        selectedValue: [],
     };
     } componentDidMount(){
+
         fetch("http://shortcuts.api.pierre-jehan.com/categories?page=1")
         .then(response=>response.json())
         .then(data=>this.setState({importCategories: data["hydra:member"]}))
         .catch(error=>console.log("error"));
 
-        /*fetch("http://shortcuts.api.pierre-jehan.com/shortcuts?page=1")
-        .then(response=>response.json())
-        .then(data=>this.setState({importShortcuts: data["hydra:member"]}))
-        .catch(error=>console.log("error"));*/
   } render() {
-      console.log(this.state.importShortcuts);
-      console.log(this.state.importCategories);
-      const categorieJsx=this.state.importCategories.map(cat=>(<Picker.Item key={cat.id} value={cat.name} label={cat.name}/>));
+      console.log(this.props);
+      const categorieJsx=this.state.importCategories.map(cat=>(<Picker.Item key={cat.id} value={cat.id} label={cat.name}/>));
+      //transferer le shortcut du premier map dans le onpress de touchable oppacity
       const shortcutJsx = this.state.importShortcuts.map((shortcut) => (
 
-            <View key={shortcut.id} style={styles.shortcutMainContainer}>
+            <TouchableOpacity key={shortcut.id} onPress={()=>this.props.navigation.navigate("Shortcut")} style={styles.shortcutMainContainer}>
               <Text style={styles.shortcutTitle}>{shortcut.title}</Text>
               <Text style={styles.shortcutSoftName}>{shortcut.software.name}</Text>
               <View style={styles.shortcutSmallContainer}>
@@ -36,30 +35,37 @@ export default class CategorieSearchScreen extends Component{
                   </Text>
                 ))}
               </View>
-            </View>
+            </TouchableOpacity>
 
         ));
       return(
-          <View style={styles.mainContainer}>
-            <Text style={styles.pickerTitle}>Rechercher par Catégories: </Text>
-            <Picker style={styles.picker}
-                selectedValue={this.state.importCategories}
-                onValueChange={(selectedValue)=>{fetch("http://shortcuts.api.pierre-jehan.com/shortcuts?page=1")
-                .then(response=>response.json())
-                .then(data=>this.setState({importShortcuts: data["hydra:member"]}))
-                .catch(error=>console.log("error"));}}>
-                {categorieJsx}
-            </Picker>
-            {shortcutJsx}
+        <ScrollView >
+            <View style={styles.mainContainer}>
+                <Text style={styles.pickerTitle}>Rechercher par Catégories: </Text>
 
-          </View>
+                <Picker style={styles.picker}
+                    selectedValue={this.state.selectedValue}
+                    onValueChange={(cat, shortcut)=>{ console.log(cat);
+                    fetch("http://shortcuts.api.pierre-jehan.com/shortcuts?categories.id="+cat)
+                    .then(response=>response.json())
+                    .then(data=>this.setState({importShortcuts: data["hydra:member"], selectedValue: shortcut}))
+                    .catch(error=>console.log("error"))
+                    }}>
+
+                    {categorieJsx}
+
+                </Picker>
+
+                {shortcutJsx}
+            </View>
+        </ScrollView>
     )
   }
 }
 
 const styles = StyleSheet.create({
     mainContainer:{
-        alignItems: 'center',
+        alignItems: 'center'
 
     },
     pickerTitle:{
@@ -94,6 +100,7 @@ const styles = StyleSheet.create({
     },
     shortcutText:{
         borderWidth: 1,
-        width: 200
+        width: 200,
+        textAlign: "center",
     },
 })
