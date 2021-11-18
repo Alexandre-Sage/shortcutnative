@@ -1,9 +1,8 @@
 import React from 'react';
 import {StyleSheet, Text, View, Button, Image, Picker, TouchableOpacity, ScrollView} from 'react-native';
 import {Component} from "react";
-/*selectedValue="name"
-onValueChange={(cat) => this.setState({categorie: cat})}*/
-//Changement fait au niveaux de selectedValue state ajouter URL du on value change a changer
+import ShortcutScreen from './ShortcutScreen';
+
 export default class CategorieSearchScreen extends Component{
   constructor(props){
     super(props)
@@ -20,9 +19,9 @@ export default class CategorieSearchScreen extends Component{
         .catch(error=>console.log("error"));
 
   } render() {
-      console.log(this.props);
+
       const categorieJsx=this.state.importCategories.map(cat=>(<Picker.Item key={cat.id} value={cat.id} label={cat.name}/>));
-      //transferer le shortcut du premier map dans le onpress de touchable oppacity
+
       const shortcutJsx = this.state.importShortcuts.map((shortcut) => (
 
             <TouchableOpacity key={shortcut.id} onPress={()=>this.props.navigation.navigate("Shortcut")} style={styles.shortcutMainContainer}>
@@ -57,6 +56,7 @@ export default class CategorieSearchScreen extends Component{
                 </Picker>
 
                 {shortcutJsx}
+                <ShortcutScreen data={[this.state.selectedValue]}/>
             </View>
         </ScrollView>
     )

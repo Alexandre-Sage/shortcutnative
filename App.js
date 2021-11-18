@@ -19,6 +19,7 @@ export default function App() {
           component={CategoryScreen}/>
       <Stack.Screen name="Shortcut"
           component={ShortcutScreen}/>
+
       </Stack.Navigator>
     </NavigationContainer>
   )
