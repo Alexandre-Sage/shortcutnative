@@ -9,15 +9,15 @@ console.log(this.state.choosenShortcut);*/
 export default class ShortcutScreen extends Component{
     constructor(props){
         super(props)
-        console.log("p");
-        console.log(this.props.data);
+        console.log("on press func");
+        console.log(this.props.route)
         this.state={
             shortcutState: []
         }
     } componentDidMount(){
 
     } render(){
-        console.log(this.props.data);
+
 
         return(
             <View>

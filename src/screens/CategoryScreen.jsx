@@ -24,7 +24,7 @@ export default class CategorieSearchScreen extends Component{
 
       const shortcutJsx = this.state.importShortcuts.map((shortcut) => (
 
-            <TouchableOpacity key={shortcut.id} onPress={()=>this.props.navigation.navigate("Shortcut")} style={styles.shortcutMainContainer}>
+            <TouchableOpacity key={shortcut.id} onPress={()=>this.props.navigation.navigate("Shortcut", {shortcut: shortcut})} style={styles.shortcutMainContainer}>
               <Text style={styles.shortcutTitle}>{shortcut.title}</Text>
               <Text style={styles.shortcutSoftName}>{shortcut.software.name}</Text>
               <View style={styles.shortcutSmallContainer}>
@@ -33,7 +33,7 @@ export default class CategorieSearchScreen extends Component{
                     {cat.name}
                   </Text>
                 ))}
-                <ShortcutScreen data={[this.state.importShortcuts]}/>
+
               </View>
             </TouchableOpacity>
 
