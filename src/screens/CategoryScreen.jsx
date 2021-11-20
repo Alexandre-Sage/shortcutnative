@@ -33,6 +33,7 @@ export default class CategorieSearchScreen extends Component{
                     {cat.name}
                   </Text>
                 ))}
+                <ShortcutScreen data={[this.state.importShortcuts]}/>
               </View>
             </TouchableOpacity>
 
@@ -44,7 +45,7 @@ export default class CategorieSearchScreen extends Component{
 
                 <Picker style={styles.picker}
                     selectedValue={this.state.selectedValue}
-                    onValueChange={(cat, shortcut)=>{ console.log(cat);
+                    onValueChange={(cat, shortcut)=>{ console.log("test");
                     fetch("http://shortcuts.api.pierre-jehan.com/shortcuts?categories.id="+cat)
                     .then(response=>response.json())
                     .then(data=>this.setState({importShortcuts: data["hydra:member"], selectedValue: shortcut}))
@@ -56,7 +57,7 @@ export default class CategorieSearchScreen extends Component{
                 </Picker>
 
                 {shortcutJsx}
-                <ShortcutScreen data={[this.state.selectedValue]}/>
+
             </View>
         </ScrollView>
     )

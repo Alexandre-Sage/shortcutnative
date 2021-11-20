@@ -6,17 +6,18 @@ import {Component} from "react";
 this.setState({choosenShortcut: shortcut})
 console.log(this.state.choosenShortcut);*/
 
-export default class CategorieSearchScreen extends Component{
+export default class ShortcutScreen extends Component{
     constructor(props){
         super(props)
-
+        console.log("p");
+        console.log(this.props.data);
         this.state={
             shortcutState: []
         }
     } componentDidMount(){
 
     } render(){
-
+        console.log(this.props.data);
 
         return(
             <View>
