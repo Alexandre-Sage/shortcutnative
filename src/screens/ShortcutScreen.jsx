@@ -7,21 +7,12 @@ this.setState({choosenShortcut: shortcut})
 console.log(this.state.choosenShortcut);*/
 
 export default class ShortcutScreen extends Component{
-    constructor(props){
-        super(props)
-        console.log("on press func");
-        console.log(this.props.route)
-        this.state={
-            shortcutState: []
-        }
-    } componentDidMount(){
 
-    } render(){
-
-
+    render(){
+        const shortcut= this.props.route.params.shortcut
         return(
             <View>
-            <Text></Text>
+                <Text>{shortcut.title}</Text>
             </View>
     )
     }
