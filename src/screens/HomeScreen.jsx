@@ -26,7 +26,8 @@ export default class HomeScreen extends Component {
                      <Text style={styles.homeTitle}>Ou Bien: </Text>
 
                      <View>
-                        <TouchableOpacity style={styles.buttonTouch}><Text style={styles.touchableText}>Ajouter un raccourcis</Text></TouchableOpacity>
+                        <TouchableOpacity style={styles.buttonTouch}
+                            onPress={()=>this.props.navigation.navigate("AddScreen")}><Text style={styles.touchableText}>Ajouter un raccourcis</Text></TouchableOpacity>
                      </View>
                   </View>
 
