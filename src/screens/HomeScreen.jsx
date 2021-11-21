@@ -19,7 +19,8 @@ export default class HomeScreen extends Component {
 
                      <View>
                         <TouchableOpacity style={styles.buttonTouch} onPress={()=>this.props.navigation.navigate("Category")}><Text style={styles.touchableText}>Catégories</Text></TouchableOpacity>
-                        <TouchableOpacity style={styles.buttonTouch}><Text style={styles.touchableText}>Logiciels</Text></TouchableOpacity>
+                        <TouchableOpacity style={styles.buttonTouch}
+                            onPress={()=>this.props.navigation.navigate("Software")}><Text style={styles.touchableText}>Logiciels</Text></TouchableOpacity>
                      </View>
 
                      <Text style={styles.homeTitle}>Ou Bien: </Text>

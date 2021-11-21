@@ -16,8 +16,8 @@ export default class ShortcutScreen extends Component{
             <View style={styles.mainContainerDetails} key={key}>
             {
 
-                Object.entries(shortcut).slice(3,9).map(([title, detail, key])=>(
-                <View style={styles.row} key={key}>
+                Object.entries(shortcut).slice(3,9).map(([title, detail, keyMap])=>(
+                <View style={styles.row} key={keyMap}>
                     <Text style={styles.apiTitle}>{title}</Text>
                     <Text style={styles[title]}>{detail}</Text>
                 </View>
@@ -51,28 +51,34 @@ const styles = StyleSheet.create({
     },
     row:{
         marginTop: 20,
-        borderWidth: 2
+        borderWidth: 2,
+        height: 150,
+        justifyContent: 'space-around',
     },
     apiTitle:{
-
+        fontSize: 20,
+    },
+    apiTitletitle:{
+        fontSize: 100,
     },
     title:{
-        fontSize: 25,
+        fontSize: 30,
         textAlign: 'center'
     },
     windows:{
-        fontSize:50,
+        fontSize: 20,
+
     },
     macos:{
-
+        fontSize: 20,
     },
     linux:{
-
+        fontSize: 20,
     },
     context:{
-
+        fontSize: 20,
     },
     description:{
-
+        fontSize: 20,
     },
 })

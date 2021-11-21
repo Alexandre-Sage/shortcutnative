@@ -3,24 +3,24 @@ import {StyleSheet, Text, View, Button, Image, Picker, TouchableOpacity, ScrollV
 import {Component} from "react";
 
 
-export default class CategorieSearchScreen extends Component{
+export default class SoftwareSearchScreen extends Component{
   constructor(props){
     super(props)
     this.state={
-        importCategories: [],
+        importSoftware: [],
         importShortcuts: [],
         selectedValue: [],
     };
     } componentDidMount(){
 
-        fetch("http://shortcuts.api.pierre-jehan.com/categories?page=1")
+        fetch("http://shortcuts.api.pierre-jehan.com/software?page=1")
         .then(response=>response.json())
-        .then(data=>this.setState({importCategories: data["hydra:member"]}))
+        .then(data=>this.setState({importSoftware: data["hydra:member"]}))
         .catch(error=>console.log("error"));
 
   } render() {
 
-      const categorieJsx=this.state.importCategories.map(cat=>(<Picker.Item key={cat.id} value={cat.id} label={cat.name}/>));
+      const categorieJsx=this.state.importSoftware.map(cat=>(<Picker.Item key={cat.id} value={cat.id} label={cat.name}/>));
 
       const shortcutJsx = this.state.importShortcuts.map((shortcut) => (
 
@@ -41,12 +41,12 @@ export default class CategorieSearchScreen extends Component{
       return(
         <ScrollView >
             <View style={styles.mainContainer}>
-                <Text style={styles.pickerTitle}>Rechercher par Catégories: </Text>
+                <Text style={styles.pickerTitle}>Rechercher par Logiciels: </Text>
 
                 <Picker style={styles.picker}
                     selectedValue={this.state.selectedValue}
                     onValueChange={(cat, shortcut)=>{ console.log("test");
-                    fetch("http://shortcuts.api.pierre-jehan.com/shortcuts?categories.id="+cat)
+                    fetch("http://shortcuts.api.pierre-jehan.com/shortcuts?software.id="+cat)
                     .then(response=>response.json())
                     .then(data=>this.setState({importShortcuts: data["hydra:member"], selectedValue: shortcut}))
                     .catch(error=>console.log("error"))

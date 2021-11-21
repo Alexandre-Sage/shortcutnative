@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StyleSheet, Text, View } from 'react-native';
 import HomeScreen from './src/screens/HomeScreen';
 import CategoryScreen from './src/screens/CategoryScreen';
+import SoftwareScreen from './src/screens/SoftwareScreen';
 import ShortcutScreen from './src/screens/ShortcutScreen';
 
 const Stack = createNativeStackNavigator();
@@ -19,6 +20,9 @@ export default function App() {
           component={CategoryScreen}/>
       <Stack.Screen name="Shortcut"
           component={ShortcutScreen}/>
+      <Stack.Screen
+        name="Software"
+        component={SoftwareScreen}/>
 
       </Stack.Navigator>
     </NavigationContainer>
