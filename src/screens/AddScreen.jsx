@@ -26,7 +26,7 @@ export default class AddScreen extends Component {
                     description: "",
                         software: "",
 
-                        categories: [],
+                        categories: "",
                     },
                 importCategories:[],
                 importSoftware: []
@@ -46,8 +46,9 @@ export default class AddScreen extends Component {
         .catch(error=>console.log(error));
 
     } render(){
-        console.log(this.state.importCategories);
+
         const categoriesJsx= this.state.importCategories.map((cat)=>(<Picker.Item key={cat.id} value={cat["@id"]} label={cat.name}/>))
+         const softwareJsx=this.state.importSoftware.map(soft=>(<Picker.Item key={soft.id} value={soft["@id"]} label={soft.name}/>));
 
         return(
             <View>
@@ -61,17 +62,13 @@ export default class AddScreen extends Component {
                 <Text>Categories: </Text>
                 <Picker
                         onValueChange={(catValue)=>{
-                        this.setState({apiSend: {...this.state.apiSend, categories: catValue}})}}>
+                        this.setState({apiSend: {...this.state.apiSend, categories: [catValue]}})}}>
                         {categoriesJsx}
                 </Picker>
 
                 <Text>Logiciels: </Text>
                 <Picker onValueChange={(softValue)=>this.setState({apiSend: {...this.state.apiSend, software:softValue}})}>
-                    <Picker.Item label="Google Chrome"/>
-                    <Picker.Item label="Firefox"/>
-                    <Picker.Item label="PHP Storm"/>
-                    <Picker.Item label="Visual Studio Code"/>
-                    <Picker.Item label="XD"/>
+                    {softwareJsx}
                 </Picker>
 
                 <View>
@@ -103,7 +100,14 @@ export default class AddScreen extends Component {
                     <TextInput defaultValue={"Entrez description ici"}
                                 onChangeText={(descShort)=>this.setState( {apiSend:{...this.state.apiSend, description: descShort}})}/>
                 </View>
-                <TouchableOpacity onPress={()=>{console.log(JSON.stringify(this.state.apiSend))}}><Text>Envoyer</Text></TouchableOpacity>
+                <TouchableOpacity onPress={(data)=>{console.log(JSON.stringify(this.state.apiSend));fetch("http://shortcuts.api.pierre-jehan.com/shortcuts", {
+                              method: "POST",
+                              headers: { "Content-Type": "application/json" },
+                              body: JSON.stringify(this.state.apiSend),
+                            })
+                              .then((response) => response.json())
+                              .then((data) => console.log(data))
+                              .catch((error) => console.error(error))}}><Text>Envoyer</Text></TouchableOpacity>
             </View>
         )
     }

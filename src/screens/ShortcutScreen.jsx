@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, View, Button, Image, Picker, TouchableOpacity, ScrollView} from 'react-native';
 import {Component} from "react";
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default class ShortcutScreen extends Component{
     constructor(props){
