@@ -9,7 +9,7 @@ export default class CategorieSearchScreen extends Component{
     this.state={
         importCategories: [],
         importShortcuts: [],
-        selectedValue: [],
+        selectedValue: "",
     };
     } componentDidMount(){
 

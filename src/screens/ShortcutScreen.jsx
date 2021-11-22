@@ -8,15 +8,11 @@ export default class ShortcutScreen extends Component{
         this.state={
             shortcutDetails: [this.props.route.params.shortcut]
         }
-
-
     } render(){
         console.log(this.state.shortcutDetails);
         const DetailsJsx= this.state.shortcutDetails.map((shortcut, key)=>(
             <View style={styles.mainContainerDetails} key={key}>
-            {
-
-                Object.entries(shortcut).slice(3,9).map(([title, detail, keyMap])=>(
+            {Object.entries(shortcut).slice(3,9).map(([title, detail, keyMap])=>(
                 <View style={styles.row} key={keyMap}>
                     <Text style={styles.apiTitle}>{title}</Text>
                     <Text style={styles[title]}>{detail}</Text>
