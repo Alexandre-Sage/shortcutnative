@@ -29,15 +29,26 @@ export default class AddScreen extends Component {
                         categories: [],
                     },
                 importCategories:[],
-                importSoftwares: []
+                importSoftware: []
     }
 
     } componentDidMount(){
+        //Fetch categories
+        fetch("http://shortcuts.api.pierre-jehan.com/categories?page=1")
+        .then(response=>response.json())
+        .then(data=>this.setState({importCategories: data["hydra:member"]}))
+        .catch(error=>console.log(error));
 
-
+        //Fetch software
+        fetch("http://shortcuts.api.pierre-jehan.com/software?page=1")
+        .then(response=>response.json())
+        .then(data=>this.setState({importSoftware: data["hydra:member"]}))
+        .catch(error=>console.log(error));
 
     } render(){
-        console.log(this.state);
+        console.log(this.state.importCategories);
+        const categoriesJsx= this.state.importCategories.map((cat)=>(<Picker.Item key={cat.id} value={cat["@id"]} label={cat.name}/>))
+
         return(
             <View>
                 <View>
@@ -48,16 +59,10 @@ export default class AddScreen extends Component {
                 </View>
 
                 <Text>Categories: </Text>
-                <Picker selectedValue= {this.state}
-
+                <Picker
                         onValueChange={(catValue)=>{
-
-                            this.setState({apiSend: {...this.state.apiSend, categories: catValue}})}}>
-
-                    <Picker.Item value="developpement" label="Développement"/>
-                    <Picker.Item value="design" label="Design"/>
-                    <Picker.Item value="PHP" label="PHP"/>
-                    <Picker.Item value="JavaScript" label="JavaScript"/>
+                        this.setState({apiSend: {...this.state.apiSend, categories: catValue}})}}>
+                        {categoriesJsx}
                 </Picker>
 
                 <Text>Logiciels: </Text>
@@ -112,10 +117,10 @@ export default class AddScreen extends Component {
     },
     body: JSON.stringify()*/
 
-    /*fetch(process.env.API_URL + "shortcuts", {
+    /*fetch("http://shortcuts.api.pierre-jehan.com/shortcuts", {
                   method: "POST",
                   headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify(shortcut),
+                  body: JSON.stringify(this.state.apiSend),
                 })
                   .then((response) => response.json())
                   .then((data) => console.log(data))
