@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
         color: "white",
     },
     touchable:{
-        backgroundColor: "rgba(31, 227, 236, 0.5)",
+        backgroundColor: "rgba(255, 255, 255, 0.5)",
         borderRadius: 10,
         marginTop: 25
     },
@@ -102,13 +102,14 @@ const styles = StyleSheet.create({
         height: 275,
         width: 325,
         marginTop: 55,
-        backgroundColor: "rgba(255, 255, 255, 0.6)",
+        backgroundColor: "rgba(31, 227, 236, 0.3)",
 
     },
     shortcutTitle:{
         fontSize: 18,
         marginBottom: 40,
-        textAlign: 'center'
+        textAlign: 'center',
+        color: "white"
     },
     shortcutSoftName:{
         fontSize: 17,
@@ -125,8 +126,8 @@ const styles = StyleSheet.create({
         width: 200,
         height:40,
         textAlign: "center",
-        paddingTop: 8,
+        paddingTop: 9,
         fontSize:15,
-        backgroundColor: "rgba(31, 227, 236, 0.3)",
+        backgroundColor: "rgba(255, 255, 255, 0.5)",
     },
 })

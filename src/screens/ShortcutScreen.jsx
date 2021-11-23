@@ -10,17 +10,6 @@ export default class ShortcutScreen extends Component{
             shortcutDetails: this.props.route.params.shortcut
         }
     } render(){
-/*Image*/
-/*if (shortcutImage){
-    <Image style={styles.img} source={{uri: shortcutImage[0][1]}}/>
-} else {
-
-}*/
-
-        const shortcutImage= Object.entries(this.state.shortcutDetails.image).slice(2);
-        console.log(shortcutImage[0][1])
-        const imageTry= <Image style={styles.img} source={{uri: "http://shortcuts.api.pierre-jehan.com/"+shortcutImage[0][1]}}/>
-        console.log(imageTry);
 /*Details géné*/
         const DetailsJsx=
             <View style={styles.mainContainerDetails}>
@@ -34,11 +23,20 @@ export default class ShortcutScreen extends Component{
 
 /*Categories*/
         const categoriesJsx= this.state.shortcutDetails.categories.map((category, key)=>(
-            <Text key={key}>{category.name}</Text>
+            <Text style={styles.categories} key={key}>{category.name}</Text>
         ))
 
 /*Software*/
-        const softwareJsx= <Text>{this.state.shortcutDetails.software.name}</Text>
+        const softwareJsx= <Text syle={styles.software}>{this.state.shortcutDetails.software.name}</Text>
+
+/*Image*/
+        let image
+        if (this.state.shortcutDetails.image){
+            const shortcutImage= Object.entries(this.state.shortcutDetails.image).slice(2);
+             image= <Image style={styles.img} source={{uri: "http://shortcuts.api.pierre-jehan.com/"+shortcutImage[0][1]}}/>
+        } else {
+             image= <Image style={styles.img} source={require("../../assets/marmotte.jpeg")}/>
+        }
 
         return(
             <LinearGradient colors={[  "rgba(41,45,44,0.9)", "rgba(37,42,42,0.9)", "rgba(88,81,67,0.8)", "rgba(66,64,56,0.7)", "rgba(66,64,56,0.7)", "rgba(66,64,56,0.6)", "rgba(66,64,56,0.6)","rgba(66,64,56,0.7)","rgba(66,64,56,0.7)", "transparent" ]}
@@ -46,10 +44,26 @@ export default class ShortcutScreen extends Component{
                             end={[0.9,0]}
                             style={styles.gradientStyle}>
             <ScrollView style={styles.mainContainer}>
+
                 {DetailsJsx}
-                {imageTry}
-                {categoriesJsx}
-                {softwareJsx}
+                <View style={styles.imageContainer}>
+                    {image}
+                </View>
+
+                <View style={styles.softCatContainer}>
+                    <View style={styles.categoriesContainer}>
+                        <Text style={styles.categoriesTitle}>Categories: </Text>
+                        <View style={styles.smallContainerCategories}>
+                            {categoriesJsx}
+                        </View>
+                    </View>
+                    <View style={styles.softwareContainer}>
+                        <Text style={styles.softwareTitle}>Logiciels</Text>
+                        <View style={styles.smallContainerSoftware}>
+                            {softwareJsx}
+                        </View>
+                    </View>
+                </View>
             </ScrollView>
             </LinearGradient>
         )
@@ -57,13 +71,9 @@ export default class ShortcutScreen extends Component{
 };
 
 const styles = StyleSheet.create({
-    img:{
-        height: 100,
-        width: 100
-    },
+
     mainContainer:{
         height: "100%",
-
         alignContent: 'space-around'
     },
     mainContainerDetails:{
@@ -144,4 +154,80 @@ const styles = StyleSheet.create({
         marginLeft: "auto",
         marginRight: "auto",
     },
+    imageContainer:{
+        alignItems: 'center',
+        marginTop: 20
+    },
+    img:{
+        height: 250,
+        width: 350,
+        borderRadius: 10
+    },
+    softCatContainer:{
+        flexDirection: 'row',
+        marginLeft: "auto",
+        marginRight: "auto",
+        marginTop: 20,
+        justifyContent: 'space-around',
+        backgroundColor: "rgba(31, 227, 236, 0.5)",
+        width:350,
+        height: 140,
+        borderRadius: 10,
+    },
+    categoriesContainer:{
+        height:80,
+        marginTop: "auto",
+        marginBottom: "auto",
+        borderRightWidth: 1,
+        borderRightColor:"rgba(31, 227, 236, 0.3)",
+        width: 160
+    },
+    categoriesTitle:{
+        color: "white",
+        borderBottomWidth: 1,
+        borderBottomColor:"rgba(31, 227, 236, 0.3)",
+        width: 125,
+        fontSize: 18,
+        textAlign: 'center'
+    },
+    categories:{
+
+    },
+    softwareContainer:{
+        height:80,
+        marginTop: "auto",
+        marginBottom: "auto",
+    },
+    softwareTitle:{
+        color: "white",
+        borderBottomWidth: 1,
+        borderBottomColor: "rgba(31, 227, 236, 0.3)",
+        width: 150,
+        fontSize: 18,
+        textAlign: 'center'
+    },
+    software:{
+
+    },
+    smallContainerCategories:{
+        backgroundColor: "rgba(255, 255, 255, 0.4)",
+        height: 65,
+        width: 125,
+        marginTop: 10,
+        alignItems:  'center',
+        justifyContent: 'center',
+        borderRadius: 10
+
+    },
+        smallContainerSoftware:{
+            backgroundColor: "rgba(255, 255, 255, 0.4)",
+            height: 65,
+            width: 125,
+            marginTop: 10,
+            alignItems:  'center',
+            justifyContent: 'center',
+            borderRadius: 10,
+            marginLeft: 16
+
+        },
 })

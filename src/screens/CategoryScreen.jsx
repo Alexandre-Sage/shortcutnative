@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, View, Button, Image, Picker, TouchableOpacity, ScrollView} from 'react-native';
 import {Component} from "react";
-import { LinearGradient } from 'expo-linear-gradient';
+import {LinearGradient} from 'expo-linear-gradient';
 
 
 export default class CategorieSearchScreen extends Component{
@@ -40,7 +40,7 @@ export default class CategorieSearchScreen extends Component{
 
         ));
       return(
-        <LinearGradient colors={[  "rgba(41,45,44,0.9)", "rgba(37,42,42,0.9)", "rgba(88,81,67,0.8)", "rgba(66,64,56,0.7)", "rgba(66,64,56,0.7)", "rgba(66,64,56,0.6)", "rgba(66,64,56,0.6)","rgba(66,64,56,0.7)","rgba(66,64,56,0.7)", "transparent" ]}
+        <LinearGradient colors={["rgba(41,45,44,0.9)", "rgba(37,42,42,0.9)", "rgba(88,81,67,0.8)", "rgba(66,64,56,0.7)", "rgba(66,64,56,0.7)", "rgba(66,64,56,0.6)", "rgba(66,64,56,0.6)","rgba(66,64,56,0.7)","rgba(66,64,56,0.7)", "transparent" ]}
                         start={[0.2,0.6]}
                         end={[0.9,0]}
                         style={styles.gradientStyle}>
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
         color: "white",
     },
     touchable:{
-        backgroundColor: "rgba(31, 227, 236, 0.5)",
+        backgroundColor: "rgba(255, 255, 255, 0.5)",
         borderRadius: 10,
         marginTop: 25
     },
@@ -103,13 +103,14 @@ const styles = StyleSheet.create({
         height: 275,
         width: 325,
         marginTop: 55,
-        backgroundColor: "rgba(255, 255, 255, 0.6)",
+        backgroundColor: "rgba(31, 227, 236, 0.3)",
 
     },
     shortcutTitle:{
         fontSize: 18,
         marginBottom: 40,
-        textAlign: 'center'
+        textAlign: 'center',
+        color: "white"
     },
     shortcutSoftName:{
         fontSize: 17,
@@ -128,6 +129,6 @@ const styles = StyleSheet.create({
         textAlign: "center",
         paddingTop: 9,
         fontSize:15,
-        backgroundColor: "rgba(31, 227, 236, 0.3)",
+        backgroundColor: "rgba(255, 255, 255, 0.5)",
     },
 })
