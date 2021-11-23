@@ -112,20 +112,3 @@ export default class AddScreen extends Component {
         )
     }
 };
-
-/*fetch("http://shortcuts.api.pierre-jehan.com/shortcuts",{
-    method: "POST",
-    headers: {
-        accept: "application/json",
-        "Content-type": "application/json"
-    },
-    body: JSON.stringify()*/
-
-    /*fetch("http://shortcuts.api.pierre-jehan.com/shortcuts", {
-                  method: "POST",
-                  headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify(this.state.apiSend),
-                })
-                  .then((response) => response.json())
-                  .then((data) => console.log(data))
-                  .catch((error) => console.error(error));*/

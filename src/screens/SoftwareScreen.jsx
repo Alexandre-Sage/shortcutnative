@@ -9,7 +9,7 @@ export default class SoftwareSearchScreen extends Component{
     this.state={
         importSoftware: [],
         importShortcuts: [],
-        selectedValue: [],
+        selectedValue: "",
     };
     } componentDidMount(){
 
@@ -80,7 +80,8 @@ const styles = StyleSheet.create({
     },
     pickerTitle:{
         fontSize: 25,
-        marginTop: 15
+        marginTop: 15,
+        color: "white",
     },
     touchable:{
         backgroundColor: "rgba(31, 227, 236, 0.5)",

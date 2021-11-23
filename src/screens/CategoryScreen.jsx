@@ -40,17 +40,17 @@ export default class CategorieSearchScreen extends Component{
 
         ));
       return(
-         <LinearGradient colors={[  "rgba(41,45,44,0.9)", "rgba(37,42,42,0.9)", "rgba(88,81,67,0.8)", "rgba(66,64,56,0.7)", "rgba(66,64,56,0.7)", "rgba(66,64,56,0.6)", "rgba(66,64,56,0.6)","rgba(66,64,56,0.7)","rgba(66,64,56,0.7)", "transparent" ]}
-                         start={[0.2,0.6]}
-                         end={[0.9,0]}
-                         style={styles.gradientStyle}>
+        <LinearGradient colors={[  "rgba(41,45,44,0.9)", "rgba(37,42,42,0.9)", "rgba(88,81,67,0.8)", "rgba(66,64,56,0.7)", "rgba(66,64,56,0.7)", "rgba(66,64,56,0.6)", "rgba(66,64,56,0.6)","rgba(66,64,56,0.7)","rgba(66,64,56,0.7)", "transparent" ]}
+                        start={[0.2,0.6]}
+                        end={[0.9,0]}
+                        style={styles.gradientStyle}>
         <ScrollView >
             <View style={styles.mainContainer}>
                 <Text style={styles.pickerTitle}>Rechercher par Catégories: </Text>
 
                 <TouchableOpacity style={styles.touchable}><Picker style={styles.picker}
                     selectedValue={this.state.selectedValue}
-                    onValueChange={(cat, shortcut)=>{ console.log("test");
+                    onValueChange={(cat, shortcut)=>{ console.log(cat); console.log(shortcut);
                     fetch("http://shortcuts.api.pierre-jehan.com/shortcuts?categories.id="+cat)
                     .then(response=>response.json())
                     .then(data=>this.setState({importShortcuts: data["hydra:member"], selectedValue: shortcut}))
@@ -81,7 +81,8 @@ const styles = StyleSheet.create({
     },
     pickerTitle:{
         fontSize: 25,
-        marginTop: 15
+        marginTop: 15,
+        color: "white",
     },
     touchable:{
         backgroundColor: "rgba(31, 227, 236, 0.5)",
@@ -125,7 +126,7 @@ const styles = StyleSheet.create({
         width: 200,
         height:40,
         textAlign: "center",
-        paddingTop: 8,
+        paddingTop: 9,
         fontSize:15,
         backgroundColor: "rgba(31, 227, 236, 0.3)",
     },
