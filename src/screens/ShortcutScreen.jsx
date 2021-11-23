@@ -22,8 +22,8 @@ export default class ShortcutScreen extends Component{
             </View>
 
 /*Categories*/
-        const categoriesJsx= this.state.shortcutDetails.categories.map((category, key)=>(
-            <Text style={styles.categories} key={key}>{category.name}</Text>
+        const categoriesJsx= this.state.shortcutDetails.categories.map((category)=>(
+            <Text style={styles.categories} key={category.id}>{category.name}</Text>
         ))
 
 /*Software*/
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
         backgroundColor: "rgba(31, 227, 236, 0.5)",
     },
     apiTitle:{
-        fontSize: 20,
+        fontSize: 25,
         borderBottomWidth: 1,
         borderBottomColor: "rgba(31, 227, 236, 0.5)",
         paddingBottom: 15,
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
         color: "white"
     },
     title:{
-        fontSize: 25,
+        fontSize: 30,
         textAlign: 'center',
         backgroundColor: "rgba(255, 255, 255, 0.4)",
         borderRadius: 10,

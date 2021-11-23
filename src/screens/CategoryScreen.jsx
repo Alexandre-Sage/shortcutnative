@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View, Button, Image, Picker, TouchableOpacity, ScrollView} from 'react-native';
+import {StyleSheet, Text, View, Button, Image, Picker, TouchableOpacity, ScrollView, ActivityIndicator} from 'react-native';
 import {Component} from "react";
 import {LinearGradient} from 'expo-linear-gradient';
 
@@ -11,6 +11,7 @@ export default class CategorieSearchScreen extends Component{
         importCategories: [],
         importShortcuts: [],
         selectedValue: "",
+        loading: false,
     };
     } componentDidMount(){
 
@@ -51,17 +52,18 @@ export default class CategorieSearchScreen extends Component{
                 <TouchableOpacity style={styles.touchable}><Picker style={styles.picker}
                     selectedValue={this.state.selectedValue}
                     onValueChange={(cat, shortcut)=>{ console.log(cat); console.log(shortcut);
+                    this.setState({loading: true})
                     fetch("http://shortcuts.api.pierre-jehan.com/shortcuts?categories.id="+cat)
                     .then(response=>response.json())
-                    .then(data=>this.setState({importShortcuts: data["hydra:member"], selectedValue: shortcut}))
+                    .then(data=>this.setState({importShortcuts: data["hydra:member"], selectedValue: shortcut, loading: false}))
                     .catch(error=>console.log("error"))
                     }}>
 
                     {categorieJsx}
 
                 </Picker></TouchableOpacity>
+            {this.state.loading? <ActivityIndicator/> : shortcutJsx}
 
-                {shortcutJsx}
 
             </View>
         </ScrollView>

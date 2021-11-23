@@ -23,9 +23,11 @@ export default class AddScreen extends Component {
                     },
                 importCategories:[],
                 importSoftware: []
+            }
+
     }
 
-    } componentDidMount(){
+    componentDidMount(){
         //Fetch categories
         fetch("http://shortcuts.api.pierre-jehan.com/categories?page=1")
         .then(response=>response.json())
@@ -38,10 +40,12 @@ export default class AddScreen extends Component {
         .then(data=>this.setState({importSoftware: data["hydra:member"]}))
         .catch(error=>console.log(error));
 
-    } render(){
+    }
+
+    render() {
 
         const categoriesJsx= this.state.importCategories.map((cat)=>(<Picker.Item key={cat.id} value={cat["@id"]} label={cat.name}/>))
-         const softwareJsx=this.state.importSoftware.map(soft=>(<Picker.Item key={soft.id} value={soft["@id"]} label={soft.name}/>));
+        const softwareJsx=this.state.importSoftware.map(soft=>(<Picker.Item key={soft.id} value={soft["@id"]} label={soft.name}/>));
 
         return(
             <LinearGradient style={styles.linear} colors={[  "rgba(41,45,44,0.9)", "rgba(37,42,42,0.9)", "rgba(88,81,67,0.8)", "rgba(66,64,56,0.7)", "rgba(66,64,56,0.7)", "rgba(66,64,56,0.6)", "rgba(66,64,56,0.6)","rgba(66,64,56,0.7)","rgba(66,64,56,0.7)", "transparent" ]}
@@ -106,16 +110,26 @@ export default class AddScreen extends Component {
                                 defaultValue={"Entrez description ici"}
                                 onChangeText={(descShort)=>this.setState( {apiSend:{...this.state.apiSend, description: descShort}})}/>
                 </View>
-                <TouchableOpacity style={styles.buttonSend} onPress={(data)=>{console.log(JSON.stringify(this.state.apiSend));fetch("http://shortcuts.api.pierre-jehan.com/shortcuts", {
+                <TouchableOpacity
+                    style={styles.buttonSend}
+                    onPress={(data)=> {
+                        console.log(JSON.stringify(this.state.apiSend));
+                        fetch("http://shortcuts.api.pierre-jehan.com/shortcuts", {
                               method: "POST",
                               headers: { "Content-Type": "application/json" },
                               body: JSON.stringify(this.state.apiSend),
                             })
                               .then((response) => response.json())
-                              .then((data) => console.log(data))
+                              .then((data) => {
+                                  console.log(data)
+                                  Alert.alert("Raccouris ajouter avec succes retour a la page home")
+                                  this.props.navigation.navigate("home")
+                              })
                               .catch((error) => console.error(error))
-                                this.props.navigation.navigate("home")
-                            Alert.alert("Raccouris ajouter avec succes retour a la page home")}}><Text style={styles.buttonText}>Envoyer</Text></TouchableOpacity>
+                            }}
+                            >
+                            <Text style={styles.buttonText}>Envoyer</Text>
+                        </TouchableOpacity>
                         </ScrollView>
                     </LinearGradient>
         )
